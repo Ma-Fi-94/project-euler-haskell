@@ -42,7 +42,13 @@ problem25 :: Int -> Int
 problem25 d = length . takeWhile (<10^(d-1)) $ fibs
   where
     fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-    
+
+-- Need to have an "Integer" as input to avoid overflows.
+-- Using sets for efficient doublet handling.
+-- Everything else trivial.
+problem29 :: Integer -> Int
+problem29 i = Set.size . Set.fromList $ [a^b | a <- [2..i], b <- [2..i]]
+
 main :: IO ()
 main = do
     -- putStrLn $ "Problem 21: " ++ show (problem21 10000)
@@ -51,5 +57,6 @@ main = do
     -- putStrLn $ "Problem 23: " ++ show (problem23 28123)
     -- putStrLn $ "Problem 24: " ++ show (problem24 1000000)
     -- putStrLn $ "Problem 25: " ++ show (problem25 1000)
+    -- putStrLn $ "Problem 29: "  ++ show (problem29 100)
     print "--- Finished. ---"
 
