@@ -43,6 +43,14 @@ problem25 d = length . takeWhile (<10^(d-1)) $ fibs
   where
     fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
+-- A closed-form expression for every "ring" is easy to derive.
+-- We here simply sum over them, although we could also
+-- come up with some closed-form expression of the sum,
+-- which is probably some third-degree polynomial, I guess.
+-- But this approach basically runs instantaneously, so it's good enough.
+problem28 :: Int -> Int
+problem28 n = 1 + sum (map (\i -> 4*i^2 - 6*i + 6) [3,5..n])
+
 -- Need to have an "Integer" as input to avoid overflows.
 -- Using sets for efficient doublet handling.
 -- Everything else trivial.
@@ -57,6 +65,7 @@ main = do
     -- putStrLn $ "Problem 23: " ++ show (problem23 28123)
     -- putStrLn $ "Problem 24: " ++ show (problem24 1000000)
     -- putStrLn $ "Problem 25: " ++ show (problem25 1000)
-    -- putStrLn $ "Problem 29: "  ++ show (problem29 100)
+    putStrLn $ "Problem 28: " ++ show (problem28 1001)
+    -- putStrLn $ "Problem 29: " ++ show (problem29 100)
     print "--- Finished. ---"
 
