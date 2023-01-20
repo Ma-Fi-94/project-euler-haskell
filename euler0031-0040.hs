@@ -16,12 +16,12 @@ problem34 = sum [x | x <- [10..10000000], x == sumFac x]
 -- This is pretty slow, but I currently don't see any directly
 -- obvious way of speeding this up...
 problem39 :: Int -> Int
-problem39 = fst . maximumBy (comparing snd) . zip [1..] . map (length . triples) . enumFromTo 1 
+problem39 = fst . maximumBy (comparing snd) . zip [1..] . map nbTriples . enumFromTo 1 
   where
-    triples p = [(a,b,c) | a <- [1..(p-2)],
-                           b <- [(a+1)..(p-1)],
-                           let c = p - a - b,
-                           a^2 + b^2 == c^2]
+    nbTriples p = length [(a,b,c) | a <- [1..(p-2)],
+                                    b <- [(a+1)..(p-1)],
+                                    let c = p - a - b,
+                                    a^2 + b^2 == c^2]
 
 -- Direct calculation    
 problem40 :: Int
