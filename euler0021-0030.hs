@@ -2,7 +2,7 @@
 
 import qualified Data.Set as Set
 import Data.List (sort, permutations)
-import Data.List.Split (splitOn)
+--import Data.List.Split (splitOn)
 import Data.Char (ord)
 
 -- For every a, there is always exactly one candidate b, which makes
@@ -16,10 +16,10 @@ problem21 n = sum [a+b | a <- [1..(n-1)],
     d i = sum . filter (\x -> i `rem` x == 0) $ enumFromTo 1 (i-1)
 
 -- Love it.
-problem22 :: String -> Int
-problem22 = sum . zipWith (*) [1..] . map value . sort . map (tail . init) . splitOn ","
-  where
-    value = sum . map (subtract 64 . ord)
+--problem22 :: String -> Int
+--problem22 = sum . zipWith (*) [1..] . map value . sort . map (tail . init) . splitOn ","
+--  where
+--    value = sum . map (subtract 64 . ord)
     
 -- This is annoyingly slow (slightly below 2 min on my machine). 
 problem23 :: Int -> Int
@@ -43,6 +43,7 @@ problem25 d = length . takeWhile (<10^(d-1)) $ fibs
   where
     fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
+-- TODO
 problem26 :: Int -> Int
 problem26 d = undefined
 
@@ -66,6 +67,14 @@ problem28 n = 1 + sum (map (\i -> 4*i^2 - 6*i + 6) [3,5..n])
 problem29 :: Integer -> Int
 problem29 i = Set.size . Set.fromList $ [a^b | a <- [2..i], b <- [2..i]]
 
+-- For a "proper" sum we need at least two digits, thus 10 is a lower bound.
+-- 7 digits could at most sum to 7x9^5=413'343, thus 1'000'000 is an upper bound.
+-- We enumerate and check all of these cases.
+problem30 :: Int
+problem30 = sum [x | x<-[10..1000000], x==s(x)]
+    where
+      s = sum . map (^5) . map (read :: String -> Int) . map (:[]) . show
+
 main :: IO ()
 main = do
     -- putStrLn $ "Problem 21: " ++ show (problem21 10000)
@@ -76,6 +85,6 @@ main = do
     -- putStrLn $ "Problem 25: " ++ show (problem25 1000)
     -- putStrLn $ "Problem 28: " ++ show (problem28 1001)
     -- putStrLn $ "Problem 29: " ++ show (problem29 100)
-    print $ zip [1..] . map (take 10 . dec) $ [1..999]
+    putStrLn $ "Problem 30: " ++ show (problem30)
     print "--- Finished. ---"
 
