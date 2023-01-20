@@ -7,20 +7,20 @@
 problem34 :: Int
 problem34 = sum [x | x <-[10..10000000], x == sumFac x]
   where
-    sumFac = sum . map fac . map (read :: String -> Int) . map (:[]) . show
+    sumFac = sum . map (fac . read . (:[])) . show
     fac    = product . enumFromTo 1
 
 
 -- Direct calculation    
 problem40 :: Int
-problem40 = product . map read . map (:[]) . map (c!!) $ indices
+problem40 = product . map (read . (:[]) . (c!!)) $ indices
   where
     indices = [0, 9, 99, 999, 9999, 99999, 999999]
     c       = concat [show i | i <- [1..1000000]]
 
 main :: IO ()
 main = do
-    --putStrLn $ "Problem 34: " ++ show (problem34)
+    putStrLn $ "Problem 34: " ++ show (problem34)
     putStrLn $ "Problem 40: " ++ show (problem40)
     print "--- Finished. ---"
 
