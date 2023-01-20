@@ -16,7 +16,7 @@ problem34 = sum [x | x <- [10..10000000], x == sumFac x]
 -- This is pretty slow, but I currently don't see any directly
 -- obvious way of speeding this up...
 problem39 :: Int -> Int
-problem39 = fst . maximumBy (comparing snd) . zip [1..] . map nbTriples . enumFromTo 1 
+problem39 = fst . maximumBy (comparing snd) . zip [1..] . map nbTriples . enumFromTo 12
   where
     nbTriples p = length [(a,b,c) | a <- [1..(p-2)],
                                     b <- [(a+1)..(p-1)],
@@ -33,7 +33,7 @@ problem40 = product . map (read . (:[]) . (c!!)) $ indices
 main :: IO ()
 main = do
     -- putStrLn $ "Problem 34: " ++ show (problem34)
-    print $ problem39 1000
+    putStrLn $ "Problem 39: " ++ show (problem39 1000)
     -- putStrLn $ "Problem 40: " ++ show (problem40)
     print "--- Finished. ---"
 
